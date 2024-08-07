@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: GDSC-UET
+  data:
+    mongodb:
+      uri: mongodb://localhost:27018/GDSC-UET
+      username: root
+      password: 123456789
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+
