@@ -7,17 +7,16 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Getter
 @Setter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@FieldDefaults(level = lombok.AccessLevel.PRIVATE)
-@Document(collection = "jobs")
-@Builder
-public class Job {
-    // add properties
+@FieldDefaults(level = AccessLevel.PRIVATE)
+@Document(collection = "position")
+public class Position {
+
     @Id
     String id;
-    String position_name;
-    String team_name;
-    String description;
-    String requirements;
+    String name;
+    String responsibilities;
+    String teamName;
 }
