@@ -13,6 +13,7 @@ import java.util.Map;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class ProjectDetailResponse {
+    String id;
     String name;
     double version;
     String description;

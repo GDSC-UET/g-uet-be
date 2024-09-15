@@ -28,5 +28,4 @@ public class Project {
     String description;
     Map<String, String> links;
     List<Member> contributors;
-
 }

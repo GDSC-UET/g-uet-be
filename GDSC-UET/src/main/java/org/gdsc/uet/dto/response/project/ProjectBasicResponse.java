@@ -11,6 +11,7 @@ import java.util.Date;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class ProjectBasicResponse {
+    String id;
     String name;
     String status;
     Date startedAt;
