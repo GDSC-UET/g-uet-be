@@ -2,8 +2,12 @@ package org.gdsc.uet.entity;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.gdsc.uet.entity.enums.JobStatus;
+import org.gdsc.uet.entity.enums.JobTag;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -19,5 +23,8 @@ public class Job {
     String position_name;
     String team_name;
     String description;
+    JobStatus status;
     String requirements;
+    List<Applicant> applicants;
+    JobTag tag;
 }
