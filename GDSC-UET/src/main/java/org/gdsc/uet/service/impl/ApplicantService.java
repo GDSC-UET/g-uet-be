@@ -4,10 +4,13 @@ import lombok.RequiredArgsConstructor;
 import org.gdsc.uet.dto.request.ApplicantCreationRequest;
 import org.gdsc.uet.dto.response.applicant.ApplicantBasicResponse;
 import org.gdsc.uet.dto.response.applicant.ApplicantDetailResponse;
+import org.gdsc.uet.dto.response.applicant.ApplicantPageResponse;
 import org.gdsc.uet.entity.Applicant;
 import org.gdsc.uet.mapper.ApplicantMapper;
 import org.gdsc.uet.repository.ApplicantRepository;
 import org.gdsc.uet.service.IApplicantService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -44,9 +47,19 @@ public class ApplicantService implements IApplicantService {
     }
 
     @Override
-    public List<ApplicantBasicResponse> getAllApplicants() {
-        return applicantRepository.findAll().stream()
+    public ApplicantPageResponse getAllApplicants(Pageable pageable) {
+        Page<Applicant> applicantPage = applicantRepository.findAll(pageable);
+
+        List<ApplicantBasicResponse> applicantBasicResponses = applicantPage.getContent().stream()
                 .map(applicantMapper::toApplicantBasicResponse)
                 .collect(Collectors.toList());
+
+        return ApplicantPageResponse.builder()
+                .page(applicantPage.getNumber())
+                .size(applicantPage.getSize())
+                .totalElements((int) applicantPage.getTotalElements())
+                .totalPages(applicantPage.getTotalPages())
+                .applicantBasicResponses(applicantBasicResponses)
+                .build();
     }
 }

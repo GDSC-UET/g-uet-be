@@ -3,6 +3,8 @@ package org.gdsc.uet.service;
 import org.gdsc.uet.dto.request.ApplicantCreationRequest;
 import org.gdsc.uet.dto.response.applicant.ApplicantBasicResponse;
 import org.gdsc.uet.dto.response.applicant.ApplicantDetailResponse;
+import org.gdsc.uet.dto.response.applicant.ApplicantPageResponse;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -14,5 +16,5 @@ public interface IApplicantService {
 
     ApplicantDetailResponse getApplicantInfo(String applicantId);
 
-    List<ApplicantBasicResponse> getAllApplicants();
+    ApplicantPageResponse getAllApplicants(Pageable pageable);
 }

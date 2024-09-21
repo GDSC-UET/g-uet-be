@@ -5,8 +5,10 @@ import org.gdsc.uet.dto.request.ApplicantCreationRequest;
 import org.gdsc.uet.dto.response.applicant.ApplicantBasicResponse;
 import org.gdsc.uet.dto.response.applicant.ApplicantBasicResponse;
 import org.gdsc.uet.dto.response.applicant.ApplicantDetailResponse;
+import org.gdsc.uet.dto.response.applicant.ApplicantPageResponse;
 import org.gdsc.uet.service.IApplicantService;
 import org.gdsc.uet.ultis.BaseResponse;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -44,11 +46,15 @@ public class ApplicantController {
     }
 
     @GetMapping("/all")
-    public BaseResponse<List<ApplicantBasicResponse>> getAllApplicants() {
-        List<ApplicantBasicResponse> responseList = applicantService.getAllApplicants();
-        return BaseResponse.<List<ApplicantBasicResponse>>builder()
-                .message("All Applicants retrieved successfully")
-                .result(responseList)
+    public BaseResponse<ApplicantPageResponse> getAllJobs(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+
+        ApplicantPageResponse response = applicantService.getAllApplicants(PageRequest.of(page, size));
+
+        return BaseResponse.<ApplicantPageResponse>builder()
+                .message("All jobs retrieved successfully")
+                .result(response)
                 .build();
     }
 }
