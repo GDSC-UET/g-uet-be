@@ -4,8 +4,10 @@ import lombok.RequiredArgsConstructor;
 import org.gdsc.uet.dto.request.JobRequest;
 import org.gdsc.uet.dto.response.job.JobBasicResponse;
 import org.gdsc.uet.dto.response.job.JobDetailResponse;
+import org.gdsc.uet.dto.response.job.JobPageResponse;
 import org.gdsc.uet.service.IJobService;
 import org.gdsc.uet.ultis.BaseResponse;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -53,11 +55,16 @@ public class JobController {
     }
 
     @GetMapping("/all")
-    public BaseResponse<List<JobBasicResponse>> getAllJobs() {
-        List<JobBasicResponse> responseList = jobService.getAllJobs();
-        return BaseResponse.<List<JobBasicResponse>>builder()
+    public BaseResponse<JobPageResponse> getAllJobs(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+
+        JobPageResponse response = jobService.getAllJobs(PageRequest.of(page, size));
+
+        return BaseResponse.<JobPageResponse>builder()
                 .message("All jobs retrieved successfully")
-                .result(responseList)
+                .result(response)
                 .build();
     }
+
 }

@@ -6,12 +6,15 @@ import lombok.experimental.FieldDefaults;
 import org.gdsc.uet.dto.request.JobRequest;
 import org.gdsc.uet.dto.response.job.JobBasicResponse;
 import org.gdsc.uet.dto.response.job.JobDetailResponse;
+import org.gdsc.uet.dto.response.job.JobPageResponse;
 import org.gdsc.uet.entity.Job;
 import org.gdsc.uet.mapper.JobMapper;
 import org.gdsc.uet.repository.JobRepository;
 import org.gdsc.uet.service.IJobService;
 import org.springframework.stereotype.Service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -52,9 +55,21 @@ public class JobService implements IJobService {
     }
 
     @Override
-    public List<JobBasicResponse> getAllJobs() {
-        return jobRepository.findAll().stream()
+    public JobPageResponse getAllJobs(Pageable pageable) {
+        Page<Job> jobPage = jobRepository.findAll(pageable);
+
+        List<JobBasicResponse> jobBasicResponses = jobPage.getContent().stream()
                 .map(jobMapper::toJobBasicResponse)
                 .collect(Collectors.toList());
+
+        return JobPageResponse.builder()
+                .page(jobPage.getNumber())
+                .size(jobPage.getSize())
+                .totalElements((int) jobPage.getTotalElements())
+                .totalPages(jobPage.getTotalPages())
+                .jobBasicResponses(jobBasicResponses)
+                .build();
     }
+
+
 }

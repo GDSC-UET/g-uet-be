@@ -3,6 +3,8 @@ package org.gdsc.uet.service;
 import org.gdsc.uet.dto.request.JobRequest;
 import org.gdsc.uet.dto.response.job.JobBasicResponse;
 import org.gdsc.uet.dto.response.job.JobDetailResponse;
+import org.gdsc.uet.dto.response.job.JobPageResponse;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,5 +20,5 @@ public interface IJobService {
 
     JobDetailResponse getJobInfo(String jobId);
 
-    List<JobBasicResponse> getAllJobs();
+    JobPageResponse getAllJobs(Pageable pageable);
 }
