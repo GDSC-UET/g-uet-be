@@ -1,23 +1,17 @@
-package org.gdsc.uet.entity;
+package org.gdsc.uet.dto.request;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import org.gdsc.uet.entity.Position;
 
 import java.util.Date;
 
-@Getter
-@Setter
+@Data
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Document(collection = "applicant")
-public class Applicant {
-
-    @Id
-    String id;
+public class ApplicantCreationRequest {
     String full_name;
     String phone_number;
     String email;
