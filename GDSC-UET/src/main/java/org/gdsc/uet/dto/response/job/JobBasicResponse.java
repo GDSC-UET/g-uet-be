@@ -1,4 +1,4 @@
-package org.gdsc.uet.dto.request;
+package org.gdsc.uet.dto.response.job;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -9,9 +9,10 @@ import org.gdsc.uet.entity.enums.JobStatus;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class JobRequest {
+public class JobBasicResponse {
     String id;
     String position_name;
+    String team_name;
     String description;
     JobStatus status;
 }
