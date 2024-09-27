@@ -20,5 +20,7 @@ public interface IJobService {
 
     JobDetailResponse getJobInfo(String jobId);
 
+    JobBasicResponse updateJobStatus(String jobId);
+
     JobPageResponse getAllJobs(Pageable pageable);
 }

@@ -8,6 +8,7 @@ import org.gdsc.uet.dto.response.job.JobBasicResponse;
 import org.gdsc.uet.dto.response.job.JobDetailResponse;
 import org.gdsc.uet.dto.response.job.JobPageResponse;
 import org.gdsc.uet.entity.Job;
+import org.gdsc.uet.entity.enums.JobStatus;
 import org.gdsc.uet.mapper.JobMapper;
 import org.gdsc.uet.repository.JobRepository;
 import org.gdsc.uet.service.IJobService;
@@ -52,6 +53,22 @@ public class JobService implements IJobService {
         Job job = jobRepository.findById(jobId)
                 .orElseThrow(() -> new IllegalArgumentException("Job not found"));
         return jobMapper.toJobDetailResponse(job);
+    }
+
+    @Override
+    public JobBasicResponse updateJobStatus(String jobId) {
+        Job job = jobRepository.findById(jobId)
+                .orElseThrow(() -> new RuntimeException("Job not found"));
+
+        if (job.getStatus() == JobStatus.CLOSED) {
+            job.setStatus(JobStatus.OPEN);
+        } else {
+            job.setStatus(JobStatus.CLOSED);
+        }
+        Job updatedJob = jobRepository.save(job);
+
+        // Trả về response sau khi cập nhật
+        return jobMapper.toJobBasicResponse(updatedJob);
     }
 
     @Override

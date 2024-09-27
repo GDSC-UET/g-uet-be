@@ -21,7 +21,7 @@ public class Applicant {
     String full_name;
     String phone_number;
     String email;
-    Position position;
+    String position_id;
     Date appliedAt;
     String university;
     String link_CV;

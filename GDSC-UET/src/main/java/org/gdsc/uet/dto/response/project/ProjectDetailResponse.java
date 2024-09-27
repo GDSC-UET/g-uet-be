@@ -18,5 +18,5 @@ public class ProjectDetailResponse {
     double version;
     String description;
     Map<String, String> links;
-    List<Member> contributors;
+    List<String> list_member_id;
 }
