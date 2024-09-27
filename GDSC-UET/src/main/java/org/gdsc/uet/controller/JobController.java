@@ -54,6 +54,15 @@ public class JobController {
                 .build();
     }
 
+    @PatchMapping("/update-status/{id}")
+    public BaseResponse<JobBasicResponse> updateJobStatus(@PathVariable String id) {
+        JobBasicResponse updatedJob = jobService.updateJobStatus(id);
+        return BaseResponse.<JobBasicResponse>builder()
+                .message("Job status updated successfully")
+                .result(updatedJob)
+                .build();
+    }
+
     @GetMapping("/all")
     public BaseResponse<JobPageResponse> getAllJobs(
             @RequestParam(defaultValue = "0") int page,

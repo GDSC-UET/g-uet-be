@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ApplicantRepository extends MongoRepository<Applicant, String> {
-    Integer countByPosition(Position position);
+//    Integer countByPosition(Position position);
 }

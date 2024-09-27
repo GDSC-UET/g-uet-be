@@ -17,5 +17,5 @@ public class JobDetailResponse {
     String position_name;
     JobStatus status;
     String description;
-    List<Applicant> applicants;
+    List<String> list_applicant_id;
 }

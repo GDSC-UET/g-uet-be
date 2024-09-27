@@ -25,6 +25,6 @@ public class Job {
     String description;
     JobStatus status;
     String requirements;
-    List<Applicant> applicants;
+    List<String> list_applicant_id;
     JobTag tag;
 }
